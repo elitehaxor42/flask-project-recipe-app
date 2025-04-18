@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Our Delicious Recipes</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Delicious Recipes</h1>
+
+    <h2>Add a New Recipe</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">Recipe Name:</label>
+            <input type="text" id="name" name="name" required value="{{ form_data.get('name', '') }}">
+            {% if errors.name %}<span class="error">{{ errors.name }}</span>{% endif %}
+        </div>
+        <br>
+        <div>
+            <label for="image">Recipe Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            {% if errors.image %}<span class="error">{{ errors.image }}</span>{% endif %}
+        </div>
+        <br>
+        <div>
+            <label for="ingredients">Ingredients (one per line):</label>
+            <textarea id="ingredients" name="ingredients" rows="6" required>{{ form_data.get('ingredients', '') }}</textarea>
+            {% if errors.ingredients %}<span class="error">{{ errors.ingredients }}</span>{% endif %}
+        </div>
+        <br>
+        <div>
+            <label for="instructions">Preparation Instructions:</label>
+            <textarea id="instructions" name="instructions" rows="8" required>{{ form_data.get('instructions', '') }}</textarea>
+            {% if errors.instructions %}<span class="error">{{ errors.instructions }}</span>{% endif %}
+        </div>
+        <br>
+        <div>
+            <label for="serving">Serving Information:</label>
+            <input type="text" id="serving" name="serving" required value="{{ form_data.get('serving', '') }}">
+            {% if errors.serving %}<span class="error">{{ errors.serving }}</span>{% endif %}
+        </div>
+        <br>
+        {% if errors.general %}<span class="error">{{ errors.general }}</span><br>{% endif %}
+        <button type="submit">Add Recipe</button>
+    </form>
+
+    <hr>
+
+    {% if recipes %}
+        {% for recipe in recipes %}
+            <div>
+                <h2>{{ recipe.name }}</h2>
+                <img src="{{ url_for('static', filename=recipe.image) }}" alt="{{ recipe.name }}" style="max-width: 300px;">
+                <h3>Ingredients:</h3>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+                <h3>Preparation Instructions:</h3>
+                <p>{{ recipe.instructions }}</p>
+                <p><strong>Serving:</strong> {{ recipe.serving }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No recipes available yet.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('delete_recipe_page') }}">Delete Recipes</a></p>
+    <p><a href="{{ url_for('home') }}">Go back to the Homepage</a></p>
+
+    <script>
+        const addRecipeForm = document.querySelector('form');
+
+        addRecipeForm.addEventListener('submit', function(event) {
+            const nameInput = document.getElementById('name');
+            const imageInput = document.getElementById('image');
+            const ingredientsTextarea = document.getElementById('ingredients');
+            const instructionsTextarea = document.getElementById('instructions');
+            const servingInput = document.getElementById('serving');
+
+            if (nameInput.value.trim() === '') {
+                alert('Please enter a recipe name.');
+                event.preventDefault();
+                nameInput.focus();
+                return false;
+            }
+
+            if (imageInput.value === '') {
+                alert('Please select an image for the recipe.');
+                event.preventDefault();
+                imageInput.focus();
+                return false;
+            }
+
+            if (ingredientsTextarea.value.trim() === '') {
+                alert('Please enter the ingredients.');
+                event.preventDefault();
+                ingredientsTextarea.focus();
+                return false;
+            }
+
+             if (instructionsTextarea.value.trim() === '') {
+                alert('Please enter the preparation instructions.');
+                event.preventDefault();
+                instructionsTextarea.focus();
+                return false;
+            }
+
+             if (servingInput.value.trim() === '') {
+                alert('Please enter the serving information.');
+                event.preventDefault();
+                servingInput.focus();
+                return false;
+            }
+
+            return true;
+        });
+    </script>
+
+</body>
+</html>

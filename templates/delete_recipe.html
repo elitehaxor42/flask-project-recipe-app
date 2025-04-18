@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Recipes</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .errors-list {
+            list-style: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Recipes</h1>
+
+    {% if delete_errors %}
+        <ul class="errors-list">
+            {% for error in delete_errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        <ul>
+            {% if recipes %}
+                {% for recipe in recipes %}
+                    <li>
+                        <input type="checkbox" name="recipes_to_delete" value="{{ loop.index0 }}">
+                        {{ recipe.name }}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No recipes to delete.</li>
+            {% endif %}
+        </ul>
+
+        {% if recipes %}
+            <button type="submit">Delete Selected Recipes</button>
+        {% endif %}
+    </form>
+
+    <p><a href="{{ url_for('recipes_page') }}">Go back to Recipes</a></p>
+    <p><a href="{{ url_for('home') }}">Go back to the Homepage</a></p>
+</body>
+</html>
