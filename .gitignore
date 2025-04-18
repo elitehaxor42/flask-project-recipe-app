@@ -1,0 +1,10 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+.venv/
+
+# Flask specific files
+.flaskenv
