@@ -1,0 +1,93 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #0056b3;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    margin-top: 5px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    display: block; /* Make errors appear on a new line */
+    margin-top: 5px;
+}
+
+.errors-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.errors-list li {
+     margin-bottom: 5px;
+}
+
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Style for recipe list items */
+.recipe {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recipe img {
+    max-width: 100%; /* Ensure images don't overflow their container */
+    height: auto;
+    display: block; /* Remove extra space below image */
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.recipe ul {
+    padding-left: 20px;
+}
+
+.recipe li {
+    margin-bottom: 5px;
+}
